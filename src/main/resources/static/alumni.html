@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Alumni</title>
+</head>
+<body>
+
+<h2>Registered Alumni</h2>
+
+<div id="alumniList"></div>
+
+<script>
+
+    async function fetchAlumni() {
+
+        const response = await fetch("http://localhost:8080/users/all");
+
+        const users = await response.json();
+
+        let output = "";
+
+        users.forEach(user => {
+
+            output += `
+                <div style="border:1px solid black; padding:10px; margin:10px;">
+                    <h3>${user.name}</h3>
+                    <p>Email: ${user.email}</p>
+                    <p>Graduation Year: ${user.graduationYear}</p>
+                    <p>Company: ${user.company}</p>
+                    <p>Job Role: ${user.jobRole}</p>
+                </div>
+            `;
+        });
+
+        document.getElementById("alumniList").innerHTML = output;
+    }
+
+    fetchAlumni();
+
+</script>
+
+</body>
+</html>
